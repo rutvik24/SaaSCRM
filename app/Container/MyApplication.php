@@ -20,14 +20,19 @@ class MyApplication extends Application {
         return $path;
     }
 
-//    public function environmentFile()
-//    {
-//        $domain = request()->getHttpHost();
-//
-//        $subdomain = explode('.', $domain)[0];
-//
-//        return '.env.' . $subdomain;
-//    }
+    public function environmentFile()
+    {
+
+        if ($this->runningInConsole()) {
+            return '.env';
+        }
+
+        $domain = request()->getHttpHost();
+
+        $subdomain = explode('.', $domain)[0];
+
+        return '.env.' . $subdomain;
+    }
 
     public function getCachedConfigPath() {
         $env = env('APP_ENV');
