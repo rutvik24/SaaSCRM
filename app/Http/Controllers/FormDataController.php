@@ -79,7 +79,7 @@ class FormDataController extends Controller
         $envFile = file_get_contents(base_path('.env'));
         $envFile = str_replace('APP_URL=https://demo.rutviknabhoya.me', 'APP_URL=http://' . $validatedData['subdomain'] . '.rutviknabhoya.me', $envFile);
         $envFile = str_replace('DB_DATABASE=saascrm', 'DB_DATABASE=' . $db_name, $envFile);
-        $envFile = str_replace('DB_USERNAME=rutvik-demo', 'DB_USERNAME=' . $db_username, $envFile);
+        $envFile = str_replace('DB_USERNAME=rutviknabhoya-demo', 'DB_USERNAME=' . $db_username, $envFile);
         $envFile = str_replace('DB_PASSWORD=Admin@123', 'DB_PASSWORD=' . $db_password, $envFile);
 
         file_put_contents(base_path('env/.env.' . $validatedData['subdomain']), $envFile);
