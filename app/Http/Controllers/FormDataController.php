@@ -19,7 +19,7 @@ class FormDataController extends Controller
             'email' => ['required', 'email', Rule::unique('form_data', 'email')],
         ]);
 
-        $db_name = 'saas_' . $validatedData['subdomain'];
+        $db_name = 'saas-' . $validatedData['subdomain'];
         $db_username = $validatedData['db_username'];
         $db_password = $this->generateRandomString();
         $host = '129.154.232.195';
