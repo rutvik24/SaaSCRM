@@ -98,7 +98,7 @@ class AuthController extends Controller
 
         $envFile = file_get_contents(base_path('.env'));
         $envFile = str_replace('APP_URL=https://app.rutviknabhoya.me', 'APP_URL=http://' . $data['subdomain'] . '.app.rutviknabhoya.me', $envFile);
-        $envFile = str_replace('DB_DATABASE=saascrm', 'DB_DATABASE=' . $db_name, $envFile);
+        $envFile = str_replace('DB_DATABASE=saasdb', 'DB_DATABASE=' . $db_name, $envFile);
         $envFile = str_replace('DB_USERNAME=rutvik-demo', 'DB_USERNAME=' . $db_username, $envFile);
         $envFile = str_replace('DB_PASSWORD=Admin@123', 'DB_PASSWORD=' . $db_password, $envFile);
 //        $envFile = str_replace('APP_URL=https://saascrm.test', 'APP_URL=http://' . $data['subdomain'] . '.saascrm.test', $envFile);
