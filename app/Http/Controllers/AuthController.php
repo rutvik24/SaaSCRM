@@ -106,9 +106,9 @@ class AuthController extends Controller
 //        $envFile = str_replace('DB_USERNAME=root', 'DB_USERNAME=' . $db_username, $envFile);
 //        $envFile = str_replace('DB_PASSWORD=', 'DB_PASSWORD=' . $db_password, $envFile);
 
-        file_put_contents(base_path('env/.env.' . $data['subdomain']), $envFile);
+        file_put_contents(base_path('env/.env.app.' . $data['subdomain']), $envFile);
 
-        $environment = (new \josegonzalez\Dotenv\Loader(base_path('env/.env.app' . $data['subdomain'])))->parse()->toArray();
+        $environment = (new \josegonzalez\Dotenv\Loader(base_path('env/.env.app.' . $data['subdomain'])))->parse()->toArray();
 
         $command = 'php artisan migrate:fresh';
 
