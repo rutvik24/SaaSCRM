@@ -104,6 +104,171 @@
     </div>
 </section>
 
+<section
+    id="pricing"
+    class="relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] mx-auto bg-white dark:bg-gray-900"
+>
+    <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+            <div class="w-full px-4">
+                <div class="mx-auto mb-[60px] max-w-[620px] text-center lg:mb-20">
+              <span class="mb-2 block text-lg font-semibold text-white">
+                Pricing Table
+              </span>
+                    <h2
+                        class="mb-4 text-3xl font-bold text-white sm:text-4xl md:text-[40px]"
+                    >
+                        Our Pricing Plan
+                    </h2>
+                    <p
+                        class="text-lg leading-relaxed text-body-color text-white sm:text-xl sm:leading-relaxed"
+                    >
+                        There are many variations of passages of Lorem Ipsum available
+                        but the majority have suffered alteration in some form.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center">
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <div
+                    class="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl border border-primary border-opacity-20 bg-white py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
+                    data-wow-delay=".15s
+              "
+                >
+              <span
+                  class="mb-2 block text-base font-medium uppercase text-dark"
+              >
+                TRIAL PLAN
+              </span>
+                    <h2 class="mb-9 text-[28px] font-semibold text-primary">
+                        Rs 0/30 Days
+                    </h2>
+
+                    <div class="mb-10">
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            Total Users: 10
+                        </p>
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            Total Inquiry to be visible: First 50 Inquiries in current month
+                        </p>
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            10 GB File storage including inquiry storage and property images storage
+                        </p>
+                    </div>
+                    <div class="w-full">
+                        <a
+                            href="{{ route('check-domain') }}"
+                            class="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-blue-700 hover:text-white"
+                        >
+                            Purchase Now
+                        </a>
+                    </div>
+                    <span
+                        class="absolute left-0 bottom-0 z-[-1] block h-14 w-14 rounded-tr-full bg-primary"
+                    >
+              </span>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <div
+                    class="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl bg-primary bg-blue-700 py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
+                    data-wow-delay=".1s
+              "
+                >
+              <span
+                  class="mb-5 inline-block rounded-full border border-white bg-white py-2 px-6 text-base font-semibold uppercase text-primary"
+              >
+                Basic Starter Plan
+              </span>
+                    <span
+                        class="mb-2 block text-base font-medium uppercase text-white"
+                    >
+                STARTING FROM
+              </span>
+                    <h2 class="mb-9 text-[28px] font-semibold text-white">
+                        Rs 2000/Month
+                    </h2>
+
+                    <div class="mb-10">
+                        <p class="mb-1 text-base font-medium leading-loose text-white">
+                            Total Users: 25
+                        </p>
+                        <p class="mb-1 text-base font-medium leading-loose text-white">
+                            Total Inquiry to be visible: First 100 Inquiries  in current month (Upgrade to show more inquiries)
+                        </p>
+                        <p class="mb-1 text-base font-medium leading-loose text-white">
+                            25 GB File storage including inquiry storage and property images storage
+                        </p>
+                    </div>
+                    <div class="w-full">
+                        <a
+                            href="{{ route('check-domain') }}"
+                            class="inline-block rounded-full border border-white bg-white py-4 px-11 text-center text-base font-medium text-dark transition duration-300 ease-in-out hover:border-0 hover:bg-gray-800 hover:text-white"
+                        >
+                            Purchase Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <div
+                    class="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl border border-primary border-opacity-20 bg-white py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
+                    data-wow-delay=".15s
+              "
+                >
+              <span
+                  class="mb-2 block text-base font-medium uppercase text-dark"
+              >
+                Premium Plan
+              </span>
+                    <h2 class="mb-9 text-[28px] font-semibold text-primary">
+                        Rs 3500/Month
+                    </h2>
+
+                    <div class="mb-10">
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            Total Users: 50
+                        </p>
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            Total Inquiry to be visible: First 250 Inquiries  in current month (Upgrade to show more inquiries)
+                        </p>
+                        <p
+                            class="mb-1 text-base font-medium leading-loose text-body-color"
+                        >
+                            50 GB File storage including inquiry storage and property images storage
+                        </p>
+                    </div>
+                    <div class="w-full">
+                        <a
+                            href="{{ route('check-domain') }}"
+                            class="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-blue-700 hover:text-white"
+                        >
+                            Purchase Now
+                        </a>
+                    </div>
+
+                    <span
+                        class="absolute right-0 top-0 z-[-1] block h-14 w-14 rounded-bl-full bg-secondary"
+                    >
+              </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
         <h2 class="mb-8 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 lg:mb-16 dark:text-white md:text-4xl">
