@@ -76,7 +76,7 @@ class AuthController extends Controller
             'X-Auth-Key' => env('CLOUDFLARE_KEY'),
             'Authorization' => 'Bearer ' . env('CLOUDFLARE_TOKEN')])->post('https://api.cloudflare.com/client/v4/zones/b325d932406272ef4dd734643cf8f40b/dns_records', [
             'type' => 'A',
-            'name' => $data['subdomain'] . '.app.rutviknabhoya.me',
+            'name' => $data['subdomain'] . '.rutviknabhoya.me',
             'content' => env('HOST'),
             'ttl' => 1,
             'proxied' => true,
