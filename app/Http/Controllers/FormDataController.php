@@ -96,7 +96,7 @@ class FormDataController extends Controller
         }
         \Log::info($process->getOutput());;
 
-        return redirect('http://' . $validatedData['subdomain'] . '.' . request()->getHttpHost() . '/new/app');
+        return redirect('http://' . $validatedData['subdomain'] . '.rutviknabhoya.me' . '/new/app');
     }
 
     public function create()
