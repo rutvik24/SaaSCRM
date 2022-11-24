@@ -68,7 +68,6 @@ class AuthController extends Controller
         $user->subdomain = $data['subdomain'];
         $user->username = $data['username'];
         $user->db_name = $data['db_name'];
-        $user->db_username = $data['username'];
         $user->db_password = $data['db_password'];
 
         $user->save();
