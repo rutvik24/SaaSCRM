@@ -76,7 +76,7 @@ class AuthController extends Controller
             'X-Auth-Key' => env('CLOUDFLARE_KEY'),
             'Authorization' => 'Bearer ' . env('CLOUDFLARE_TOKEN')])->post('https://api.cloudflare.com/client/v4/zones/b325d932406272ef4dd734643cf8f40b/dns_records', [
             'type' => 'A',
-            'name' => $data['subdomain'] . '.rutviknabhoya.me',
+            'name' => $data['subdomain'] . '.app.rutviknabhoya.me',
             'content' => env('HOST'),
             'ttl' => 1,
             'proxied' => true,
@@ -97,9 +97,9 @@ class AuthController extends Controller
         }
 
         $envFile = file_get_contents(base_path('.env'));
-        $envFile = str_replace('APP_URL=https://demo.rutviknabhoya.me', 'APP_URL=http://' . $data['subdomain'] . '.rutviknabhoya.me', $envFile);
+        $envFile = str_replace('APP_URL=https://app.rutviknabhoya.me', 'APP_URL=http://' . $data['subdomain'] . '.app.rutviknabhoya.me', $envFile);
         $envFile = str_replace('DB_DATABASE=saascrm', 'DB_DATABASE=' . $db_name, $envFile);
-        $envFile = str_replace('DB_USERNAME=rutviknabhoya-demo', 'DB_USERNAME=' . $db_username, $envFile);
+        $envFile = str_replace('DB_USERNAME=rutvik-demo', 'DB_USERNAME=' . $db_username, $envFile);
         $envFile = str_replace('DB_PASSWORD=Admin@123', 'DB_PASSWORD=' . $db_password, $envFile);
 //        $envFile = str_replace('APP_URL=https://saascrm.test', 'APP_URL=http://' . $data['subdomain'] . '.saascrm.test', $envFile);
 //        $envFile = str_replace('DB_DATABASE=saascrm', 'DB_DATABASE=' . $db_name, $envFile);
@@ -108,7 +108,7 @@ class AuthController extends Controller
 
         file_put_contents(base_path('env/.env.' . $data['subdomain']), $envFile);
 
-        $environment = (new \josegonzalez\Dotenv\Loader(base_path('env/.env.' . $data['subdomain'])))->parse()->toArray();
+        $environment = (new \josegonzalez\Dotenv\Loader(base_path('env/.env.app' . $data['subdomain'])))->parse()->toArray();
 
         $command = 'php artisan migrate:fresh';
 
@@ -123,13 +123,13 @@ class AuthController extends Controller
         \Log::info($process->getOutput());;
 
         $domain = $request->getHttpHost();
-        $domain = explode('.', $domain);
-        if (count($domain) === 2) {
-            $domain = $domain[0] . '.' . $domain[1];
-        } else {
-            $domain = array_slice($domain, -2, 2);
-            $domain = $domain[0] . '.' . $domain[1];
-        }
+//        $domain = explode('.', $domain);
+//        if (count($domain) === 2) {
+//            $domain = $domain[0] . '.' . $domain[1];
+//        } else {
+//            $domain = array_slice($domain, -2, 2);
+//            $domain = $domain[0] . '.' . $domain[1];
+//        }
 
         return redirect('http://' . $data['subdomain'] . '.' . $domain .'/new/app');
     }

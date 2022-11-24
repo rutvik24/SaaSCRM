@@ -46,7 +46,7 @@
                                   clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <a href="/" class="text-xl font-bold flex items-center lg:ml-2.5">
+                    <a href="/view" class="text-xl font-bold flex items-center lg:ml-2.5">
                         <img src="https://demo.themesberg.com/windster/images/logo.svg" class="h-6 mr-2"
                              alt="Windster Logo">
                         <span class="self-center whitespace-nowrap">Server Manager</span>
@@ -82,7 +82,7 @@
                                 </form>
                             </li>
                             <li>
-                                <a href="/"
+                                <a href="/view"
                                    class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                                     <svg class="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75"
                                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
