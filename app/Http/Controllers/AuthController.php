@@ -122,15 +122,6 @@ class AuthController extends Controller
         }
         \Log::info($process->getOutput());;
 
-        $domain = $request->getHttpHost();
-        $domain = explode('.', $domain);
-        if (count($domain) === 2) {
-            $domain = $domain[0] . '.' . $domain[1];
-        } else {
-            $domain = array_slice($domain, -2, 2);
-            $domain = $domain[0] . '.' . $domain[1];
-        }
-
-        return redirect('http://' . $data['subdomain'] . '.' . $domain .'/new/app');
+        return redirect('http://' . $data['subdomain'] . '.rutviknabhoya.me' .'/new/app');
     }
 }
