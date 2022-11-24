@@ -86,7 +86,7 @@ class FormDataController extends Controller
 
         $environment = (new \josegonzalez\Dotenv\Loader(base_path('env/.env.' . $validatedData['subdomain'])))->parse()->toArray();
 
-        $command = 'php artisan migrate:fresh';
+        $command = 'php artisan saas:db-migrate name="' . $db_name . '"';
 
         $process = Process::fromShellCommandline($command, base_path(), $environment);
         $process->run();
