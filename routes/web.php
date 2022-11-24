@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientFormController;
 use App\Http\Controllers\FormDataController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
+
+Route::get('/check-domain', [HomeController::class, 'checkDomain'])->name('check-domain');
+
+Route::get('/signup/{subdomain}', [AuthController::class, 'create'])->name('auth.create');
+Route::post('/signup', [AuthController::class, 'store'])->name('auth.store');
 
 Route::post('/new', [FormDataController::class, 'store']);
 Route::get('/new', [FormDataController::class, 'create']);

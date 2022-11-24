@@ -17,8 +17,8 @@ class MyApplication extends Application {
             $path .= DIRECTORY_SEPARATOR . "env";
         } else if (!$this->runningInConsole()) {
             $domain = request()->getHttpHost();
-            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
-            if(!empty($subdomain)) {
+            $domainParts = explode('.', $domain);
+            if(count($domainParts) > 2) {
                 $path .= DIRECTORY_SEPARATOR . "env";
                 return $path;
             }
@@ -34,8 +34,10 @@ class MyApplication extends Application {
             return '.env.' . $input->getParameterOption('--env');
         } else if (!$this->runningInConsole()) {
             $domain = request()->getHttpHost();
-            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
-            if(!empty($subdomain)) {
+//            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
+            $domainParts = explode('.', $domain);
+            if (count($domainParts) > 2) {
+                $subdomain = $domainParts[0];
                 return '.env.' . $subdomain;
             }
         }

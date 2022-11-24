@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('subdomain')->unique();
             $table->string('db_username')->unique();
             $table->string('db_name')->unique();
-            $table->string('db_password');
-            $table->string('email')->unique();
+            $table->string('db_password')->nullable();
             $table->timestamps();
         });
     }
