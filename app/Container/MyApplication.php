@@ -37,12 +37,7 @@ class MyApplication extends Application {
 //            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
             $domainParts = explode('.', $domain);
             if (count($domainParts) > 2) {
-                if (count($domainParts) > 3) {
-                    return '.env.app.' . $domainParts[0];
-                } else {
                     return '.env.' . $domainParts[0];
-
-                }
             }
         }
 
