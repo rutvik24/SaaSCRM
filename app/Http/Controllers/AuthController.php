@@ -60,7 +60,18 @@ class AuthController extends Controller
 
         \Log::info("output1: " . $output);
 
-        $user = User::create($data);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->company_name = $data['company_name'];
+        $user->subdomain = $data['subdomain'];
+        $user->username = $data['username'];
+        $user->db_name = $data['db_name'];
+        $user->db_username = $data['username'];
+        $user->db_password = $data['db_password'];
+
+        $user->save();
 
         $response = Http::withHeaders(['X-Auth-Email' => env('CLOUDFLARE_EMAIL'),
             'X-Auth-Key' => env('CLOUDFLARE_KEY'),
@@ -87,7 +98,7 @@ class AuthController extends Controller
         }
 
         $envFile = file_get_contents(base_path('.env'));
-        $envFile = str_replace('APP_URL=https://demo.rutviknabhoya.me', 'APP_URL=http://' . $validatedData['subdomain'] . '.rutviknabhoya.me', $envFile);
+        $envFile = str_replace('APP_URL=https://demo.rutviknabhoya.me', 'APP_URL=http://' . $data['subdomain'] . '.rutviknabhoya.me', $envFile);
         $envFile = str_replace('DB_DATABASE=saascrm', 'DB_DATABASE=' . $db_name, $envFile);
         $envFile = str_replace('DB_USERNAME=rutviknabhoya-demo', 'DB_USERNAME=' . $db_username, $envFile);
         $envFile = str_replace('DB_PASSWORD=Admin@123', 'DB_PASSWORD=' . $db_password, $envFile);
