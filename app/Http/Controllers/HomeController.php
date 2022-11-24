@@ -23,7 +23,7 @@ class HomeController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('home');
+            return redirect()->route('auth.store', $data['subdomain']);
         } else {
             return back()->withErrors('subdomain', 'The subdomain is already taken');
         }
