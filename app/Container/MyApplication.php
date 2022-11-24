@@ -13,8 +13,15 @@ class MyApplication extends Application {
 
         $isConsole = $this->runningInConsole() && ($input = new ArgvInput())->hasParameterOption('--env');
 
-        if(env('SAAS_ENV') || $isConsole){
+        if($isConsole){
             $path .= DIRECTORY_SEPARATOR . "env";
+        } else if (!$this->runningInConsole()) {
+            $domain = request()->getHttpHost();
+            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
+            if(!empty($subdomain)) {
+                $path .= DIRECTORY_SEPARATOR . "env";
+                return $path;
+            }
         }
 
         return $path;
@@ -22,16 +29,18 @@ class MyApplication extends Application {
 
     public function environmentFile()
     {
-
-        if ($this->runningInConsole()) {
-            return '.env';
+        $isConsole = $this->runningInConsole() && ($input = new ArgvInput())->hasParameterOption('--env');
+        if ( $isConsole) {
+            return '.env.' . $input->getParameterOption('--env');
+        } else if (!$this->runningInConsole()) {
+            $domain = request()->getHttpHost();
+            $subdomain = str_replace('.rutviknabhoya.me', '', $domain);
+            if(!empty($subdomain)) {
+                return '.env.' . $subdomain;
+            }
         }
 
-        $domain = request()->getHttpHost();
-
-        $subdomain = explode('.', $domain)[0];
-
-        return '.env.' . $subdomain;
+        return '.env';
     }
 
     public function getCachedConfigPath() {
