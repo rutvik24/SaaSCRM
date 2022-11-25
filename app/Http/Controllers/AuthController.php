@@ -18,7 +18,7 @@ class AuthController extends Controller
 {
     public function create($subdomain, $planType)
     {
-        $data = User::where('subdomain', $subdomain)->first();
+        $data = DB::connection('mysql2')->table('users')->where('subdomain', $subdomain)->first();
         if (!$data && $planType === 'free' || 'basic' || 'premium') {
             return view('auth.create', ['subdomain' => $subdomain, 'planType' => $planType]);
         } else {
