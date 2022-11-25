@@ -4,6 +4,9 @@
     </div>
     <form action="/new/app" method="post">
         @csrf
+        @if($errors->any())
+            <p class="text-red-500 text-xs mt-2">{{ $errors->first() }}</p>
+        @endif
         <div class="flex w-3/5 items-center mt-3">
             <label class="w-80" for="name">Name:</label>
             <input type="text" name="name" id="name"

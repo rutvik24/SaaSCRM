@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientFormController;
 use App\Http\Controllers\FormDataController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RazorpayPaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
 
-Route::get('/check-domain', [HomeController::class, 'checkDomain'])->name('check-domain');
+Route::get('/check-domain/{planType}', [HomeController::class, 'checkDomain'])->name('check-domain');
 
-Route::get('/signup/{subdomain}', [AuthController::class, 'create'])->name('auth.create');
+Route::get('/signup/{subdomain}/{planType}', [AuthController::class, 'create'])->name('auth.create');
 Route::post('/signup', [AuthController::class, 'store'])->name('auth.store');
 
 Route::post('/new', [FormDataController::class, 'store']);
@@ -31,3 +32,7 @@ Route::get('/new', [FormDataController::class, 'create']);
 Route::get('/new/app', [ClientFormController::class, 'new']);
 Route::post('/new/app', [ClientFormController::class, 'store']);
 Route::get('/view', [ClientFormController::class, 'index'])->name('client-view');
+
+
+Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
+Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

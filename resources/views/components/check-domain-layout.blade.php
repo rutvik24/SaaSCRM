@@ -8,6 +8,7 @@
     <meta name="description"
           content="Get started with a free landing page built with Tailwind CSS and the Flowbite Blocks system.">
     <link href="./output.css" rel="stylesheet">
+    <link href="{{ asset('app.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>

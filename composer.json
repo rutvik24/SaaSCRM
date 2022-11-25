@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.7",
         "m1/env": "^2.2",
         "phpseclib/phpseclib": "^3.0",
-        "predis/predis": "^2.0"
+        "predis/predis": "^2.0",
+        "razorpay/razorpay": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

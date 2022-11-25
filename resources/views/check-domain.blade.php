@@ -15,6 +15,7 @@
                     @error('subdomain')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
+                    <input type="text" name="planType" id="planType" hidden readonly value="{{ $planType }}">
                     <button type="submit" class="mt-10 text-xl text-white bg-blue-700 px-5 py-3 rounded-lg">Check Availability</button>
                 </form>
             </div>

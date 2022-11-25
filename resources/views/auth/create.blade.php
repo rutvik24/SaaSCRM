@@ -1,3 +1,8 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"--}}
+{{--      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
 <x-check-domain-layout>
     <div class="dark:bg-gray-800 py-10">
         <div class="flex-wrap justify-between mx-auto max-w-screen-xl">
@@ -47,7 +52,7 @@
                     @enderror
                     <div class="flex items-center mb-5">
                         <label class="w-80 text-xl" for="company_name">Company Name:</label>
-                        <input type="company_name" name="company_name" id="company_name"
+                        <input type="text" name="company_name" id="company_name"
                                class="rounded-md p-2 w-full" required
                                placeholder="Enter Your Company Name"
                                value="{{ old('company_name') }}">
@@ -57,7 +62,7 @@
                     @enderror
                     <div class="flex items-center mb-5">
                         <label class="w-80 text-xl" for="subdomain">Sub Domain:</label>
-                        <input type="subdomain" name="subdomain" id="subdomain"
+                        <input type="text" name="subdomain" id="subdomain"
                                class="rounded-md p-2 w-full" required
                                placeholder="Enter Your Sub Domain"
                                readonly
@@ -66,7 +71,26 @@
                     @error('subdomain')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
-                    <button type="submit" class="mt-10 text-xl text-white bg-blue-700 px-5 py-3 rounded-lg">Sign Up</button>
+                    <input type="text" name="planType" id="planType" hidden readonly value="{{ $planType }}">
+                    @if($planType === 'free')
+                        <button type="submit" class="mt-10 text-xl text-white bg-blue-700 px-5 py-3 rounded-lg">Sign Up
+                        </button>
+                    @else
+                        @php
+                            $price = $planType === 'basic' ? 200000 : ($planType === 'premium' ? 350000 : 100);
+                        @endphp
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                data-amount="{{ $price }}"
+                                data-buttontext="Sign Up"
+                                data-name="app.rutviknabhoya.me"
+                                data-description="Rozerpay"
+                                data-image="https://flowbite.com/docs/images/logo.svg"
+                                data-prefill.name="name"
+                                data-prefill.email="email"
+                                data-theme.color="#ff7529">
+                        </script>
+                    @endif
                 </form>
             </div>
         </div>

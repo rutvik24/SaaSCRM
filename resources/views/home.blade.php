@@ -398,7 +398,7 @@
                     </div>
                     <div class="w-full">
                         <a
-                            href="{{ route('check-domain') }}"
+                            href="{{ route('check-domain', ['planType' => 'free']) }}"
                             class="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-blue-700 hover:text-white"
                         >
                             Purchase Now
@@ -443,7 +443,7 @@
                     </div>
                     <div class="w-full">
                         <a
-                            href="{{ route('check-domain') }}"
+                            href="{{ route('check-domain', ['planType' => 'basic']) }}"
                             class="inline-block rounded-full border border-white bg-white py-4 px-11 text-center text-base font-medium text-dark transition duration-300 ease-in-out hover:border-0 hover:bg-gray-800 hover:text-white"
                         >
                             Purchase Now
@@ -485,7 +485,7 @@
                     </div>
                     <div class="w-full">
                         <a
-                            href="{{ route('check-domain') }}"
+                            href="{{ route('check-domain', ['planType' => 'premium']) }}"
                             class="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-blue-700 hover:text-white"
                         >
                             Purchase Now
