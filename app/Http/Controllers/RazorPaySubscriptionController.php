@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\RazorPayPayments;
 use App\Models\RazorPaySubscription;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Razorpay\Api\Api;
