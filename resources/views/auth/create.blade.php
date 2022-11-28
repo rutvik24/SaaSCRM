@@ -72,25 +72,8 @@
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <input type="text" name="planType" id="planType" hidden readonly value="{{ $planType }}">
-                    @if($planType === 'free')
-                        <button type="submit" class="mt-10 text-xl text-white bg-blue-700 px-5 py-3 rounded-lg">Sign Up
-                        </button>
-                    @else
-                        @php
-                            $price = $planType === 'basic' ? 200000 : ($planType === 'premium' ? 350000 : 100);
-                        @endphp
-                        <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="{{ env('RAZORPAY_KEY') }}"
-                                data-amount="{{ $price }}"
-                                data-buttontext="Sign Up"
-                                data-name="app.rutviknabhoya.me"
-                                data-description="Rozerpay"
-                                data-image="https://flowbite.com/docs/images/logo.svg"
-                                data-prefill.name="name"
-                                data-prefill.email="email"
-                                data-theme.color="#ff7529">
-                        </script>
-                    @endif
+                    <button type="submit" class="mt-10 text-xl text-white bg-blue-700 px-5 py-3 rounded-lg">Sign Up
+                    </button>
                 </form>
             </div>
         </div>

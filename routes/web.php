@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientFormController;
 use App\Http\Controllers\FormDataController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\RazorPaySubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
 
 Route::get('/check-domain/{planType}', [HomeController::class, 'checkDomain'])->name('check-domain');
+Route::get('/checkout/{userId}/{planType}', [RazorPaySubscriptionController::class, 'index'])->name('checkout');
+Route::post('/checkout/{userId}/{planType}/{planId}', [RazorPaySubscriptionController::class, 'store'])->name('checkout.store');
 
 Route::get('/signup/{subdomain}/{planType}', [AuthController::class, 'create'])->name('auth.create');
 Route::post('/signup', [AuthController::class, 'store'])->name('auth.store');

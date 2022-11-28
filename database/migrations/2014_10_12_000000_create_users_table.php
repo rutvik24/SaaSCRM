@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('db_name')->unique();
             $table->string('db_password');
-            $table->enum('plan_type', ['free', 'basic', 'premium']);
+            $table->enum('plan_type', ['free', 'basic', 'premium'])->nullable();
             $table->bigInteger('allowed_data')->default(0);
             $table->timestamps();
         });

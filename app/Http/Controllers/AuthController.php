@@ -28,27 +28,26 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
 
-        if ($input['planType'] !== 'free') {
-
-            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-
-            $payment = $api->payment->fetch($input['razorpay_payment_id']);
-
-            if (count($input) && !empty($input['razorpay_payment_id'])) {
-                try {
-                    $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount' => $payment['amount']));
-
-                } catch (Exception $e) {
-                    return $e->getMessage();
-                    Session::put('error', $e->getMessage());
-                    return redirect()->back()->withErrors('subdomain', 'Payment failed for this subdomain');
-                }
-            }
-
-            Session::put('success', 'Payment successful');
-        }
+//        if ($input['planType'] !== 'free') {
+//
+//            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+//
+//            $payment = $api->payment->fetch($input['razorpay_payment_id']);
+//
+//            if (count($input) && !empty($input['razorpay_payment_id'])) {
+//                try {
+//                    $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount' => $payment['amount']));
+//
+//                } catch (Exception $e) {
+//                    return $e->getMessage();
+//                    Session::put('error', $e->getMessage());
+//                    return redirect()->back()->withErrors('subdomain', 'Payment failed for this subdomain');
+//                }
+//            }
+//
+//            Session::put('success', 'Payment successful');
+//        }
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -87,8 +86,6 @@ class AuthController extends Controller
 
         Log::info("output1: " . $output);
 
-        $allowed_data = $data['planType'] === 'free' ? 5 : ($data['planType'] === 'basic' ? 10 : ($data['planType'] === 'premium' ? 15 : 0));
-
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
@@ -98,8 +95,10 @@ class AuthController extends Controller
         $user->username = $data['username'];
         $user->db_name = $data['db_name'];
         $user->db_password = $data['db_password'];
-        $user->plan_type = $data['planType'];
-        $user->allowed_data = $allowed_data;
+        if($data['planType'] === 'free') {
+            $user->plan_type = 'free';
+            $user->allowed_data = 5;
+        }
 
         $user->save();
 
@@ -153,7 +152,12 @@ class AuthController extends Controller
         }
         Log::info($process->getOutput());
 
-        return redirect('http://' . $data['subdomain'] . '.rutviknabhoya.me' . '/new/app');
+        if ($data['planType'] === 'free') {
+            return redirect('http://' . $data['subdomain'] . '.rutviknabhoya.me' . '/new/app');
 //        return redirect('http://' . $data['subdomain'] . '.saascrm.test' . '/new/app');
+        } else {
+            return redirect()->route('checkout', ['userId' => $user->id, 'planType' => $data['planType']]);
+        }
+
     }
 }
