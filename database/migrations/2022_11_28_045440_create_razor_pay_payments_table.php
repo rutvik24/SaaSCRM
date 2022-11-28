@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('razorpay_invoice_url');
             $table->string('razorpay_payment_id');
             $table->string('razorpay_invoice_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

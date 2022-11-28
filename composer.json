@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "m1/env": "^2.2",
+        "nesbot/carbon": "^2.63",
         "phpseclib/phpseclib": "^3.0",
         "predis/predis": "^2.0",
         "razorpay/razorpay": "^2.8"

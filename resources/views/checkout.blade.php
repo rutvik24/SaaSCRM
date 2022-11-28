@@ -36,7 +36,6 @@
                             data-prefill.name="{{ $user->name }}"
                             data-prefill.email="{{ $user->email }}"
                             data-subscription_id="{{ $subscription_id }}"
-{{--                            data-customer_id="{{ $user->id }}"--}}
                     >
                     </script>
                 </form>

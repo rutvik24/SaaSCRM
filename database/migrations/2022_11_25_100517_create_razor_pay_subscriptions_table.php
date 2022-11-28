@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('razorpay_subscription_id');
             $table->string('razorpay_plan_id');
-            $table->string('user_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('razorpay_customer_id')->nullable();
             $table->timestamps();
         });

@@ -19,23 +19,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
+Route::middleware('check-subdomain')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
 
-Route::get('/check-domain/{planType}', [HomeController::class, 'checkDomain'])->name('check-domain');
-Route::get('/checkout/{userId}/{planType}', [RazorPaySubscriptionController::class, 'index'])->name('checkout');
-Route::post('/checkout/{userId}/{planType}/{planId}', [RazorPaySubscriptionController::class, 'store'])->name('checkout.store');
+    Route::get('/check-domain/{planType}', [HomeController::class, 'checkDomain'])->name('check-domain');
+    Route::get('/checkout/{userId}/{planType}', [RazorPaySubscriptionController::class, 'index'])->name('checkout');
+    Route::post('/checkout/{userId}/{planType}/{planId}', [RazorPaySubscriptionController::class, 'store'])->name('checkout.store');
 
-Route::get('/signup/{subdomain}/{planType}', [AuthController::class, 'create'])->name('auth.create');
-Route::post('/signup', [AuthController::class, 'store'])->name('auth.store');
+    Route::get('/signup/{subdomain}/{planType}', [AuthController::class, 'create'])->name('auth.create');
+    Route::post('/signup', [AuthController::class, 'store'])->name('auth.store');
 
-Route::post('/new', [FormDataController::class, 'store']);
-Route::get('/new', [FormDataController::class, 'create']);
+    Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
+    Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
+});
 
-Route::get('/new/app', [ClientFormController::class, 'new']);
-Route::post('/new/app', [ClientFormController::class, 'store']);
-Route::get('/view', [ClientFormController::class, 'index'])->name('client-view');
+Route::get('/expired', [HomeController::class, 'expired'])->name('expired');
 
+Route::middleware('check-subscription')->group(function () {
+    Route::get('/new/app', [ClientFormController::class, 'new']);
+    Route::post('/new/app', [ClientFormController::class, 'store']);
+    Route::get('/view', [ClientFormController::class, 'index'])->name('client-view');
+});
 
-Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
-Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

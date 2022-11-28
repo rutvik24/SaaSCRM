@@ -35,4 +35,9 @@ class HomeController extends Controller
             return back()->withErrors('subdomain', 'The subdomain is already taken');
         }
     }
+
+    public function expired()
+    {
+        return view('subscription-expire');
+    }
 }
