@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'https://app.rutviknabhoya.me/callback/razorpay',
+        '/callback/razorpay',
     ];
 }

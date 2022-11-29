@@ -21,7 +21,7 @@
                     <p class="text-white">{{ $planType === 'basic' ? '10' : '15' }}
                         Entries</p>
                 </div>
-                <form action="{{ route('checkout.store', ['userId' => $user->id, 'planType' => $planType, 'planId' => $planId]) }}" method="post">
+                <form action="/checkout/{{ $user->id }}/{{ $planType }}/{{ $planId }}" method="post">
                     @csrf
                     @php
                         $price = $planType === 'basic' ? 200000 : 350000;

@@ -36,6 +36,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/expired', [HomeController::class, 'expired'])->name('expired');
 
+Route::post('/callback/razorpay', [RazorPaySubscriptionController::class, 'callback'])->name('callback.razorpay');
+
 Route::middleware('check-subscription')->group(function () {
     Route::get('/new/app', [ClientFormController::class, 'new']);
     Route::post('/new/app', [ClientFormController::class, 'store']);

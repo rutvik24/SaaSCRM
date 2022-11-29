@@ -36,32 +36,32 @@ class AuthController extends Controller
             'planType' => ['required', 'string', 'max:255']
         ]);
 
-        $data['db_name'] = 'saas-' . $data['subdomain'];
+        $data['db_name'] = 'saas_' . $data['subdomain'];
         $data['db_password'] = $this->generateRandomString();
         $data['password'] = bcrypt($data['password']);
         $db_username = $data['username'];
         $db_name = $data['db_name'];
         $db_password = $data['db_password'];
 
-//        $createDb = 'CREATE DATABASE ' . $db_name; // create database
-//        $createUser = 'CREATE USER \'' . $db_username . '\'@\'localhost\' IDENTIFIED BY \'' . $db_password . '\''; // create user
-//        $grantPrivileges = 'GRANT ALL PRIVILEGES ON ' . $db_name . '.* TO \'' . $db_username . '\'@\'localhost\''; // grant privileges
-//
-//        $output1 = DB::connection()->statement($createDb);
-//        $output2 = DB::connection()->statement($createUser);
-//        $output3 = DB::connection()->statement($grantPrivileges);
-//
-//        Log::info($output1);
-//        Log::info($output2);
-//        Log::info($output3);
-//
-        $newEnvoyCommand = sprintf("cd %s && %s vendor/bin/envoy run addDB --db_name=\"%s\" --db_username=\"%s\" --db_password=\"%s\" --siteDomain=\"%s\" ", base_path(), env('PHP'), $db_name, $db_username, $db_password, explode('https://',env('APP_URL'))[1]);
+        $createDb = 'CREATE DATABASE ' . $db_name; // create database
+        $createUser = 'CREATE USER \'' . $db_username . '\'@\'localhost\' IDENTIFIED BY \'' . $db_password . '\''; // create user
+        $grantPrivileges = 'GRANT ALL PRIVILEGES ON ' . $db_name . '.* TO \'' . $db_username . '\'@\'localhost\''; // grant privileges
 
-        Log::info($newEnvoyCommand);
+        $output1 = DB::connection()->statement($createDb);
+        $output2 = DB::connection()->statement($createUser);
+        $output3 = DB::connection()->statement($grantPrivileges);
 
-        $output = shell_exec($newEnvoyCommand);
-
-        Log::info("output1: " . $output);
+        Log::info($output1);
+        Log::info($output2);
+        Log::info($output3);
+//
+//        $newEnvoyCommand = sprintf("cd %s && %s vendor/bin/envoy run addDB --db_name=\"%s\" --db_username=\"%s\" --db_password=\"%s\" --siteDomain=\"%s\" ", base_path(), env('PHP'), $db_name, $db_username, $db_password, explode('https://',env('APP_URL'))[1]);
+//
+//        Log::info($newEnvoyCommand);
+//
+//        $output = shell_exec($newEnvoyCommand);
+//
+//        Log::info("output1: " . $output);
 
         $user = new User();
         $user->name = $data['name'];
