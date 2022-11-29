@@ -56,7 +56,6 @@ class RazorPaySubscriptionController extends Controller
                 $RazorpaySubscriptionData->user_id = $userId;
                 $RazorpaySubscriptionData->razorpay_subscription_id = $input['razorpay_subscription_id'];
                 $RazorpaySubscriptionData->razorpay_plan_id = $planId;
-                $RazorpaySubscriptionData->razorpay_customer_id = $invoice['items']['0']['customer_id'];
 
                 $RazorpaySubscriptionData->save();
 
@@ -74,7 +73,7 @@ class RazorPaySubscriptionController extends Controller
 
                 $user = DB::connection('mysql2')->table('users')->where('id', $userId)->first();
 
-                            return redirect('http://' . $user->subdomain . '.' . env('DOMAIN') . '/new/app');
+                return redirect('http://' . $user->subdomain . '.' . env('DOMAIN') . '/new/app');
 
             } catch (Exception $e) {
                 return $e->getMessage();
@@ -83,5 +82,38 @@ class RazorPaySubscriptionController extends Controller
             }
         }
 
+    }
+
+    public function callback(Request $request)
+    {
+        $data = $request->all();
+        if ($data['event'] === 'subscription.charged') {
+            $subscription_id = $data['payload']['subscription']['entity']['id'];
+            $subscription = RazorPaySubscription::where('razorpay_subscription_id', $subscription_id)->first();
+            $invoiceId = $data['payload']['payment']['entity']['invoice_id'];
+
+            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+
+            $invoice = $api->invoice->fetch($invoiceId);
+
+            $start_date = $data['payload']['subscription']['entity']['start_at'];
+            $end_date = $data['payload']['subscription']['entity']['end_at'];
+
+            $start_date = date('d-m-Y', $start_date);
+            $end_date = date('d-m-Y', $end_date);
+
+            $RazorPayPaymentData = new RazorPayPayments();
+            $RazorPayPaymentData->subscription_status = $data['payload']['subscription']['entity']['status'];
+            $RazorPayPaymentData->subscription_start_date = $start_date;
+            $RazorPayPaymentData->subscription_end_date = $end_date;
+            $RazorPayPaymentData->subscription_id = $subscription_id;
+            $RazorPayPaymentData->razorpay_invoice_url = $invoice['short_url'];
+            $RazorPayPaymentData->razorpay_payment_id = $data['payload']['payment']['entity']['id'];
+            $RazorPayPaymentData->razorpay_invoice_id = $invoiceId;
+            $RazorPayPaymentData->user_id = $subscription->user_id;
+            $RazorPayPaymentData->save();
+
+            DB::connection('mysql2')->table('users')->where('id', $subscription->user_id)->update(['subscription_end_date' => $end_date]);
+        }
     }
 }

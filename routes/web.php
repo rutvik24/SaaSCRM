@@ -42,3 +42,5 @@ Route::middleware('check-subscription')->group(function () {
     Route::get('/view', [ClientFormController::class, 'index'])->name('client-view');
 });
 
+Route::get('callback/razorpay', [RazorPaySubscriptionController::class, 'callback'])->name('razorpay.callback');
+

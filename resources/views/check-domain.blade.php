@@ -4,7 +4,7 @@
             <div class="bg-gray-400 pl-20 pr-36 py-5 rounded-xl w-4/5">
                 <h1 class="mb-16 mt-8 text-4xl font-bold text-blue-700">Check availability of domain</h1>
                 <form action="{{ route('check-availability') }}" method="post">
-{{--                    @csrf--}}
+                    @csrf
                     <div class="flex items-center">
                         <label class="w-80 text-xl" for="subdomain">Sub Domain Name:</label>
                         <input type="text" name="subdomain" id="subdomain"

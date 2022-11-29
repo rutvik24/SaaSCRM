@@ -20,7 +20,7 @@ class CheckSubdomain
         $domainParts = explode('.', $domain);
         if (count($domainParts) > 2) {
             $subdomain = $domainParts[0];
-            if ($subdomain !== 'www') {
+            if ($subdomain !== 'www' && $subdomain !== 'app') {
                 return redirect()->route('client-view');
             }
         }
