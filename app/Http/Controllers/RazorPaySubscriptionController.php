@@ -6,6 +6,7 @@ use App\Models\RazorPayPayments;
 use App\Models\RazorPaySubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
 use Razorpay\Api\Api;
 
 class RazorPaySubscriptionController extends Controller
@@ -17,7 +18,8 @@ class RazorPaySubscriptionController extends Controller
             $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
             if ($planType === 'basic') {
                 // change plan id with your plan id
-                $subscription = $api->subscription->create(array('plan_id' => 'plan_KkDpiehLt0Qrek', 'customer_notify' => 1, 'quantity' => 1, 'total_count' => 12, 'notes' => array('customer_id' => $userId)));
+//                $subscription = $api->subscription->create(array('plan_id' => 'plan_KkDpiehLt0Qrek', 'customer_notify' => 1, 'quantity' => 1, 'total_count' => 12, 'notes' => array('customer_id' => $userId)));
+                $subscription = $api->subscription->create(array('plan_id' => 'plan_Klkpnqj6pW28v2', 'customer_notify' => 1, 'quantity' => 1, 'total_count' => 12, 'notes' => array('customer_id' => $userId)));
                 return view('checkout', ['planType' => $planType, 'user' => $user, 'subscription_id' => $subscription['id'], 'planId' => 'plan_KkDpiehLt0Qrek']);
             } else {
                 // change plan id with your plan id
@@ -87,12 +89,23 @@ class RazorPaySubscriptionController extends Controller
     public function callback(Request $request)
     {
         $data = $request->all();
+
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        Log::info('herer');
+
+        $webhookSignature = request()->header('X-Razorpay-Signature');
+        $webhookSecret = env('WEBHOOK_SECRET');
+
+        $webhookBodyContent = request()->getContent();
+
+        $api->utility->verifyWebhookSignature($webhookBodyContent, $webhookSignature, $webhookSecret);
+
+        Log::notice("Webhook Received: " . json_encode($data), ['context' => 'razorpay', 'webhook' => $data]);
         if ($data['event'] === 'subscription.charged') {
             $subscription_id = $data['payload']['subscription']['entity']['id'];
             $subscription = RazorPaySubscription::where('razorpay_subscription_id', $subscription_id)->first();
             $invoiceId = $data['payload']['payment']['entity']['invoice_id'];
 
-            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
 
             $invoice = $api->invoice->fetch($invoiceId);
 

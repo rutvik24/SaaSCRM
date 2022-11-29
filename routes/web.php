@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('check-subdomain')->group(function () {
+//Route::middleware('check-subdomain')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/check-availability', [HomeController::class, 'checkAvailability'])->name('check-availability');
 
@@ -32,7 +32,7 @@ Route::middleware('check-subdomain')->group(function () {
 
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
-});
+//});
 
 Route::get('/expired', [HomeController::class, 'expired'])->name('expired');
 
